@@ -1,16 +1,16 @@
 package com.example.travelmantics;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -33,6 +33,9 @@ public class ListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
+
+        mFirebaseDatabase = FirebaseUtil.mFirebaseDatabase;
+        mDatabaseReference = FirebaseUtil.mDatabaseReference;
     }
 
     @Override
@@ -43,7 +46,7 @@ public class ListActivity extends AppCompatActivity {
         if (FirebaseUtil.isAdmin == true) {
             insertMenu.setVisible(true);
         } else {
-            insertMenu.setVisible(true);
+            insertMenu.setVisible(false);
             // TODO
         }
         return true;
@@ -94,7 +97,7 @@ public class ListActivity extends AppCompatActivity {
         FirebaseUtil.attachListener();
     }
 
-    public void shoeMenu() {
+    public void showMenu() {
         invalidateOptionsMenu();
     }
 }

@@ -1,7 +1,5 @@
 package com.example.travelmantics;
 
-import android.app.Activity;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -37,6 +35,7 @@ public class FirebaseUtil {
     public static ArrayList<TravelDeal> mDeals;
 
     private FirebaseUtil() {}
+    //public static void openFbReference(String ref, final ListActivity callerActivity) {
 
     public static void openFbReference(String ref, final ListActivity callerActivity) {
         if ( firebaseUtil == null ) {
@@ -50,8 +49,8 @@ public class FirebaseUtil {
                     if (firebaseAuth.getCurrentUser() == null ){
                         FirebaseUtil.signIn();
                     } else {
-                        String userid = firebaseAuth.getUid();
-                        checkAdmin(userid);
+                        String userId = firebaseAuth.getUid();
+                        checkAdmin(userId);
                     }
                     Toast.makeText(callerActivity.getBaseContext(), "Welcome Back", Toast.LENGTH_LONG).show();
 
@@ -81,12 +80,12 @@ public class FirebaseUtil {
 
     public  static void checkAdmin(String uid){
         FirebaseUtil.isAdmin = false;
-        DatabaseReference ref = mFirebaseDatabase.getReference().child("adminstrators").child(uid);
+        DatabaseReference ref = mFirebaseDatabase.getReference().child("administrators").child(uid);
         ChildEventListener listener =  new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 FirebaseUtil.isAdmin = true;
-                caller.shoeMenu();
+                caller.showMenu();
             }
 
             @Override
